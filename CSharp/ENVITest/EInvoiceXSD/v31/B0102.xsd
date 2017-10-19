@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="urn:GEINV:eInvoiceMessage:B0102:3.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:GEINV:eInvoiceMessage:B0102:3.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="GenericType_3.1.xsd"/>
+	<!-- 折讓證明單接收確認 B0102-->
+	<xsd:element name="AllowanceConfirm">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 折讓單號碼 -->
+				<xsd:element name="AllowanceNumber" type="AllowanceNumberType"/>
+				<!-- 折讓單日期 -->
+				<xsd:element name="AllowanceDate" type="DateType"/>
+				<!-- 買方識別碼 -->
+				<xsd:element name="BuyerId">
+					<xsd:simpleType>
+						<xsd:restriction base="BAN">
+							<xsd:maxLength value="10"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<!-- 賣方識別碼 -->
+				<xsd:element name="SellerId">
+					<xsd:simpleType>
+						<xsd:restriction base="BAN">
+							<xsd:maxLength value="10"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<!-- 接收日期 -->
+				<xsd:element name="ReceiveDate" type="DateType"/>
+				<!-- 接收時間 -->
+				<xsd:element name="ReceiveTime" type="TimeType"/>
+				<!-- 折讓種類 -->
+			     <xsd:element name="AllowanceType" type="AllowanceTypeEnum"/>
+				<!-- 備註 -->
+				<xsd:element name="Remark" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="200"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

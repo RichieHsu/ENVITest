@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Invoice xsi:schemaLocation="urn:GEINV:eInvoiceMessage:A0401:3.1 A0401.xsd" xmlns="urn:GEINV:eInvoiceMessage:A0401:3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Main>
+    <InvoiceNumber>{{InvoiceA0401.InvoiceNumber}}</InvoiceNumber>
+    <InvoiceDate>{{InvoiceA0401.InvoiceDate}}</InvoiceDate>
+    <InvoiceTime>{{InvoiceA0401.InvoiceTime}}</InvoiceTime>
+    <Seller>
+      <Identifier>{{InvoiceA0401.SellerIdentifier}}</Identifier>
+      <Name>{{InvoiceA0401.SellerName}}</Name>
+    </Seller>
+    <Buyer>
+      <Identifier>{{InvoiceA0401.BuyerIdentifier}}</Identifier>
+      <Name>{{InvoiceA0401.BuyerName}}</Name>
+    </Buyer>
+    <InvoiceType>{{InvoiceA0401.InvoiceType}}</InvoiceType>
+    {{#if InvoiceA0401.GroupMark}}
+    <GroupMark>*</GroupMark>
+    {{/if}}
+    <DonateMark>{{InvoiceA0401.DonateMark}}</DonateMark>
+  </Main>
+  <Details>
+    {{#each InvoiceA0401.ProductItems}}
+    <ProductItem>
+      <Description>{{Description}}</Description>
+      <Quantity>{{Quantity}}</Quantity>
+      <Unit>{{Unit}}</Unit>
+      <UnitPrice>{{UnitPrice}}</UnitPrice>
+      <Amount>{{Amount}}</Amount>
+      <SequenceNumber>{{SequenceNumber}}</SequenceNumber>
+    </ProductItem>
+    {{/each}}
+  </Details>
+  <Amount>
+    <SalesAmount>{{InvoiceA0401.SalesAmount}}</SalesAmount>
+    <TaxType>{{InvoiceA0401.TaxType}}</TaxType>
+    <TaxRate>{{InvoiceA0401.TaxRate}}</TaxRate>
+    <TaxAmount>{{InvoiceA0401.TaxAmount}}</TaxAmount>
+    <TotalAmount>{{InvoiceA0401.TotalAmount}}</TotalAmount>
+    <DiscountAmount>{{InvoiceA0401.DiscountAmount}}</DiscountAmount>
+    {{#if InvoiceA0401.OriginalCurrencyAmount}}
+    <OriginalCurrencyAmount>{{InvoiceA0401.OriginalCurrencyAmount}}</OriginalCurrencyAmount>
+    {{/if}}
+    {{#if InvoiceA0401.ExchangeRate}}
+    <ExchangeRate>{{InvoiceA0401.exchangeRate}}</ExchangeRate>
+    {{/if}}
+  </Amount>
+</Invoice>

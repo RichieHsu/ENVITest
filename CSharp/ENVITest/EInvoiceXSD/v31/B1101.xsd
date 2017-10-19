@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 為向下相容v30，v31中仍保留文件移除之MIG xsd 此v31 B1101 同v30 B1101-->
+<xsd:schema xmlns="urn:GEINV:eInvoiceMessage:B1101:3.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:GEINV:eInvoiceMessage:B1101:3.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="GenericType_3.1.xsd"/>
+	<!-- 開立折讓單(鋼鐵產業Extension): B1101 -->
+	<xsd:element name="Allowance">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Main" type="Main"/>
+				<xsd:element name="Details" type="Details"/>
+				<xsd:element name="Amount" type="Amount"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- 主資料檔 -->
+	<xsd:complexType name="Main">
+		<xsd:sequence>
+			<!-- 折讓證明單號碼 -->
+			<xsd:element name="AllowanceNumber" type="AllowanceNumberType"/>
+			<!-- 折讓證明單日期 -->
+			<xsd:element name="AllowanceDate" type="DateType"/>
+			<!-- 賣方資訊 -->
+			<xsd:element name="Seller">
+				<xsd:complexType mixed="false">
+					<xsd:group ref="RoleDescriptionType"/>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- 賣方資訊 -->
+			<xsd:element name="Buyer">
+				<xsd:complexType mixed="false">
+					<xsd:group ref="RoleDescriptionType"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="AllowanceType" type="AllowanceTypeEnum"/>
+			<xsd:element name="Attachment" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:base64Binary">
+						<xsd:maxLength value="1048576"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- 明細資料 -->
+	<xsd:complexType name="Details">
+		<xsd:sequence>
+			<xsd:element name="ProductItem" minOccurs="1" maxOccurs="999">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- 發票日期 -->
+						<xsd:element name="OriginalInvoiceDate" type="DateType"/>
+						<!-- 發票號碼 -->
+						<xsd:element name="OriginalInvoiceNumber" type="InvoiceNumberType"/>
+						<!--­ 原品名排列序號 -->
+						<xsd:element name="OriginalSequenceNumber" minOccurs="0">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="3"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- 原品名 -->
+						<xsd:element name="OriginalDescription">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="256"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- 數量 -->
+						<xsd:element name="Quantity">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:decimal">
+									<xsd:totalDigits value="20"/>
+									<xsd:fractionDigits value="7"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- 數量 2 -->
+						<xsd:element name="Quantity2">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:decimal">
+									<xsd:totalDigits value="20"/>
+									<xsd:fractionDigits value="7"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- 單位 -->
+						<xsd:element name="Unit" minOccurs="0">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="6"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- 單位 2 -->
+						<xsd:element name="Unit2" minOccurs="0">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="6"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- 單價 -->
+						<xsd:element name="UnitPrice">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:decimal">
+									<xsd:totalDigits value="20"/>
+									<xsd:fractionDigits value="7"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- 單價 2 -->
+						<xsd:element name="UnitPrice2">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:decimal">
+									<xsd:totalDigits value="20"/>
+									<xsd:fractionDigits value="7"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- 金額(不含稅之進貨額) -->
+						<xsd:element name="Amount">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:decimal">
+									<xsd:totalDigits value="20"/>
+									<xsd:fractionDigits value="7"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- 金額 2 (不含稅之進貨額) -->
+						<xsd:element name="Amount2">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:decimal">
+									<xsd:totalDigits value="20"/>
+									<xsd:fractionDigits value="7"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- 營業稅額 -->
+						<xsd:element name="Tax" type="xsd:long"/>
+						<!-- 折讓證明單明細排列序號 -->
+						<xsd:element name="AllowanceSequenceNumber">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="3"/>
+									<xsd:minLength value="1"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- 課稅別 -->
+						<xsd:element name="TaxType" type="TaxTypeEnum"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- 彙總資料 -->
+	<xsd:complexType name="Amount">
+		<xsd:sequence>
+			<!-- 營業稅額合計 -->
+			<xsd:element name="TaxAmount">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:totalDigits value="12"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- 金額(不含稅之進貨額)合計 -->
+			<xsd:element name="TotalAmount">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+						<xsd:totalDigits value="12"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

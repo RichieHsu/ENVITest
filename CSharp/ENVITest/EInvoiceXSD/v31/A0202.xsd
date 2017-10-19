@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="urn:GEINV:eInvoiceMessage:A0202:3.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:GEINV:eInvoiceMessage:A0202:3.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="GenericType_3.1.xsd"/>
+	<!-- 作廢發票接收確認: A0202 -->
+	<xsd:element name="CancelInvoiceConfirm">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 作廢發票號碼 -->
+				<xsd:element name="CancelInvoiceNumber" type="InvoiceNumberType"/>
+				<!-- 發票日期 -->
+				<xsd:element name="InvoiceDate" type="DateType"/>
+				<!-- 買方識別碼 -->
+				<xsd:element name="BuyerId">
+					<xsd:simpleType>
+						<xsd:restriction base="BAN">
+							<xsd:maxLength value="10"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<!-- 賣方識別碼 -->
+				<xsd:element name="SellerId">
+					<xsd:simpleType>
+						<xsd:restriction base="BAN">
+							<xsd:maxLength value="10"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<!-- 接收日期 -->
+				<xsd:element name="CancelDate" type="DateType"/>
+				<!-- 接收時間 -->
+				<xsd:element name="CancelTime" type="TimeType"/>
+				<!-- 備註 -->
+				<xsd:element name="Remark" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+						    <xsd:minLength value="1"/>
+							<xsd:maxLength value="200"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

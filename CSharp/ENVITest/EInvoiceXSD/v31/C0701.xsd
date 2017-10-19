@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="urn:GEINV:eInvoiceMessage:C0701:3.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:GEINV:eInvoiceMessage:C0701:3.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="GenericType_3.1.xsd"/>
+	<!-- 註銷發票: C0701 -->
+	<xsd:element name="VoidInvoice">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 註銷發票號碼 -->
+				<xsd:element name="VoidInvoiceNumber" type="InvoiceNumberType"/>
+				<!-- 發票日期 -->
+				<xsd:element name="InvoiceDate" type="DateType"/>
+				<!-- 買方識別碼 -->
+				<xsd:element name="BuyerId">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="10"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<!-- 賣方識別碼 -->
+				<xsd:element name="SellerId">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="10"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<!-- 註銷日期 mod:date=> DateType -->
+				<xsd:element name="VoidDate" type="DateType"/>
+				<!-- 註銷時間 -->
+				<xsd:element name="VoidTime" type="TimeType"/>
+				<!-- 備註 -->
+				<xsd:element name="VoidReason">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="collapse"/>
+						    <xsd:minLength value="1"/>
+							<xsd:maxLength value="20"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Remark" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="200"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

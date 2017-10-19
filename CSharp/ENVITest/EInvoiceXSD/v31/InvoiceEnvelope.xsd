@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:GEINV:InvoiceEnvelope:3.1" xmlns="urn:GEINV:InvoiceEnvelope:3.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="GenericType_3.1.xsd"/>
+	<xsd:element name="InvoiceEnvelope">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="From" type="PartyInfoType"/>
+				<xsd:element name="FromVAC" type="RoutingInfoType"/>
+				<xsd:element name="To" type="PartyInfoType"/>
+				<xsd:element name="ToVAC" type="RoutingInfoType"/>
+				<xsd:element name="InvoicePack">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:any namespace="##other" processContents="lax" minOccurs="1" maxOccurs="1000"/>
+						</xsd:sequence>
+						<xsd:attribute name="messageType" type="MessageTypeEnum"/>
+						<xsd:attribute name="count" type="xsd:positiveInteger"/>
+						<xsd:attribute name="version" type="xsd:string"/>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="urn:GEINV:eInvoiceMessage:E0402:3.1"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:GEINV:eInvoiceMessage:E0402:3.1"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="GenericType_3.1.xsd" />
+	<!-- 空白未使用字軌檔 E0402 -->
+	<xsd:element name="BranchTrackBlank">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- Main -->
+				<xsd:element name="Main" type="Main" />
+				<!-- Details -->
+				<xsd:element name="Details" type="Details" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- 主檔資料 -->
+	<xsd:complexType name="Main">
+		<xsd:sequence>
+			<!--總公司統一編號 -->
+			<xsd:element name="HeadBan" type="BAN" />
+			<!--分支機構統一編號 -->
+			<xsd:element name=" BranchBan" type="BAN" />
+			<!--發票類別 -->
+			<xsd:element name="InvoiceType" type="InvoiceTypeEnum" />
+			<!--發票期別 -->
+			<xsd:element name="YearMonth">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="5" />
+						<xsd:maxLength value="5" />
+						<xsd:pattern value="\d{3}0[2|4|6|8]|\d{3}1[0|2]" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!--發票字軌 -->
+			<xsd:element name="InvoiceTrack">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="2" />
+						<xsd:maxLength value="2" />
+						<xsd:pattern value="[A-Z]{2}" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- 明細資料 -->
+	<xsd:complexType name="Details">
+		<xsd:sequence>
+			<xsd:element name="  BranchTrackBlankItem" minOccurs="1"
+				maxOccurs="10000">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- 空白發票起號 -->
+						<xsd:element name="InvoiceBeginNo">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:minLength value="8" />
+									<xsd:maxLength value="8" />
+									<xsd:pattern value="\d{8}" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- 空白發票迄號 -->
+						<xsd:element name="InvoiceEndNo">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:minLength value="8" />
+									<xsd:maxLength value="8" />
+									<xsd:pattern value="\d{8}" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
